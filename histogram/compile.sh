@@ -1,6 +1,6 @@
 #!/bin/bash
 
-flags="-std=c++14 -Wall -Wextra -Werror"
+flags="-std=c++14 -Wall -Wextra -Werror -g -O0"
 out_dir="build"
 number_of_files=`find . -name "*.cxx" | wc -l`
 extra_link_libraries='-lstdc++fs'
@@ -10,7 +10,7 @@ compiler=""
 function really_compile() {
     file=$1
     find $out_dir -name "$file.o" -delete
-    echo " [$iterator++]/[$number_of_files] Compiling $file.cxx to $out_dir/$file.o"
+    echo "[$iterator]/[$number_of_files] Compiling $file.cxx to $out_dir/$file.o"
     $compiler -c $flags $file.cxx -o $out_dir/$file.o > $out_dir/compile_$file.out 2>&1
     if [ ! "$?" == "0" ]; then
         echo "Compilation error"
@@ -26,13 +26,13 @@ function compile() {
     if [ ! -e $out_dir/$file.sha256 ]; then
         really_compile $file
     else 
-        sha_result=`sha256sum --quiet -c $out_dir/$file.sha256`
+        sha_result=`sha256sum --quiet --status -c $out_dir/$file.sha256`
         if [ ! $? -eq 0 ]; then
             really_compile $file
         fi
     fi
 
-    #$iterator=$iterator+1
+    iterator=$((iterator + 1))
 }
 
 function link {

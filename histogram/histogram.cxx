@@ -31,8 +31,10 @@ int main(int argc, char *argv[]) {
         });
 
         cout << result << endl;
+        return EXIT_SUCCESS;
 
     } catch (const std::exception &ex) {
         cout << ex.what() << endl;
+        return EXIT_FAILURE;
     }
 }

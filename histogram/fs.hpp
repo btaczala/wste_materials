@@ -10,9 +10,9 @@ namespace fs {
  * @return A content of a file stored into a std::string buffer
  *         The return buffer will be empty only if sile size is 0
  *
- * @throws An std::runtime_error is throws when a file does not exists
+ * @throws A std::runtime_error when a file does not exists
  * @throws A std::runtime_error when a path does not represents a file
- * @throws A std::runtime_error file is not readible
+ * @throws A std::runtime_error when file is not readible
  */
 std::string readFile(const std::string& fileToRead) noexcept(false);
 

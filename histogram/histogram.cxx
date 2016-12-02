@@ -7,7 +7,14 @@
 #include "utils.hpp"
 
 namespace {
-const std::size_t kMinimalArguments{2};
+const size_t kMinimalArguments{2};
+}
+
+void printUsage(const std::string &programName) {
+    using std::cout;
+    using std::endl;
+
+    cout << programName << " path_to_file " << "[searchedWord]" << endl;
 }
 
 int main(int argc, char *argv[]) {
@@ -15,12 +22,18 @@ int main(int argc, char *argv[]) {
     using std::endl;
 
     try {
-        if (static_cast<std::size_t>(argc) < kMinimalArguments) {
+        if (static_cast<size_t>(argc) < kMinimalArguments) {
+            printUsage(argv[0]);
             throw std::runtime_error("Incorrect number of arguments");
         }
 
-        const std::string searchedWord{argc == 2 ? "" : argv[2]};
-        const auto splitted = utils::split(fs::readFile(argv[1]), argc == 4 ? argv[3] : " ");
+        std::string searchedWord;
+        if (argc > 2) {
+            searchedWord = argv[2];
+        }
+
+        auto buff = fs::readFile(argv[1]);
+        const auto splitted = utils::split(buff, argc == 4 ? argv[3] : " ");
 
         const auto result = std::count_if(splitted.begin(), splitted.end(), [&](const auto &a) -> bool {
             if (searchedWord.empty()) {

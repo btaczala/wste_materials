@@ -1,43 +1,21 @@
 #include <iostream>
 #include <string>
-
 #include <vector>
 
-int my_atoi(const std::string& s) {
-    int v = std::atoi(s.c_str());
-
-    if ((v == 0 && s == "0") || v != 0) {
-        return v;
+int my_atoi(const std::string& str) {
+    int value = std::atoi(str.c_str());
+    if (value == 0 && str == "0") {
+        return value;
     }
 
-    const std::string error = "Problem with " + s;
-    throw std::runtime_error(error.c_str());
-}
+    if (value != 0) return value;
 
-int sum(const std::vector<std::string>& v) {
-    int sum = 0;
-    try {
-        for (const auto& one : v) {
-            sum += my_atoi(one);
-        }
-    } catch (std::exception& ex) {
-        throw ex;
-    }
-
-    return sum;
+    throw 10;
 }
 
 int main(int argc, char* argv[]) {
-    try {
-        std::vector<std::string> numbers;
-        for (int i = 1; i < argc; ++i) {
-            numbers.push_back(argv[i]);
-        }
+    if (argc < 2) return EXIT_FAILURE;
 
-        std::cout << sum(numbers) << std::endl;
-    } catch (const std::runtime_error& ex) {
-        std::cout << "std::runtime_error" << ex.what() << std::endl;
-    } catch (const std::exception& ex) {
-        std::cout << "std::exception" << ex.what() << std::endl;
-    }
+    std::cout << my_atoi(argv[1]) << std::endl;
+    return EXIT_SUCCESS;
 }

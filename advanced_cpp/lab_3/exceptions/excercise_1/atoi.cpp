@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <exception>
 
 int my_atoi(const std::string& str) {
     int value = std::atoi(str.c_str());
@@ -10,7 +11,7 @@ int my_atoi(const std::string& str) {
 
     if (value != 0) return value;
 
-    throw 10;
+    throw std::invalid_argument("Bad argument");
 }
 
 int main(int argc, char* argv[]) {

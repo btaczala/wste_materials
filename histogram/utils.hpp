@@ -14,7 +14,7 @@ namespace utils {
  *
  * @return A vector of strings 
  */
-std::vector<std::string> split(const std::string& buffer,
+std::vector<std::string>& split(const std::string& buffer,
                                const std::string& separator = " ");
 }
 

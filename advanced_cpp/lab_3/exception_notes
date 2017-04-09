@@ -1,0 +1,20 @@
+
+Exceptions: 
+* why do we need exceptions - on a simple "atoi" example
+int       atoi( const char *str ); - atoi return 0 when no conversion is able to do
+
+EXCERCISE - implement a atoi function on your own
+
+* what's a try block and what to do with exception
+* what to throw and what not to throw
+* what is rethrowing
+* how to correctly implement catch() 
+* catch(...)
+* exceptions specifiers + noexcept
+
+* can I resume program while throw?  (struct File)
+* Philosophical: when to throw and when not to throw
+
+* Pitfalls: performance, slicing, catching by non-const ref, catching by value
+
+Garbage in/garbage out philosophy

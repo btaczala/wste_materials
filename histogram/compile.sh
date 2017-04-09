@@ -1,6 +1,11 @@
 #!/bin/bash
 
-flags="-std=c++14 -Wall -Wextra -Werror -g -O0"
+extra_flags="-Wno-error=return-local-addr"
+debug_flags="-g -O2"
+release_flags="-O2"
+
+#flags="-std=c++14 -Wall -Wextra -Werror $extra_flags $release_flags"
+flags="-std=c++14 -Wall -Wextra -Werror $extra_flags $debug_flags"
 out_dir="build"
 number_of_files=`find . -name "*.cxx" | wc -l`
 extra_link_libraries='-lstdc++fs'
@@ -11,6 +16,7 @@ function really_compile() {
     file=$1
     find $out_dir -name "$file.o" -delete
     echo "[$iterator]/[$number_of_files] Compiling $file.cxx to $out_dir/$file.o"
+    echo "  $compiler -c $flags $file.cxx -o $out_dir/$file.o"
     $compiler -c $flags $file.cxx -o $out_dir/$file.o > $out_dir/compile_$file.out 2>&1
     if [ ! "$?" == "0" ]; then
         echo "Compilation error"
@@ -37,7 +43,8 @@ function compile() {
 
 function link {
     echo "Linking histogram"
-    clang++ $out_dir/*.o -o $out_dir/histogram $extra_link_libraries
+    echo " $compiler -m32 $out_dir/*.o -o $out_dir/histogram $extra_link_libraries"
+    $compiler -m32 $out_dir/*.o -o $out_dir/histogram $extra_link_libraries
 }
 
 mkdir -p $out_dir
@@ -45,7 +52,7 @@ compiler=$CXX
 
 if [ "$compiler" == "" ]; then
     echo "Compiler not specified, defaulting to clang++"
-    compiler="clang++"
+    compiler="g++ -m32"
 fi
 
 for file in `find . -name "*.cxx"`; do
@@ -53,3 +60,4 @@ for file in `find . -name "*.cxx"`; do
 done
 
 link
+

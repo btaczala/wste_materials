@@ -1,0 +1,31 @@
+=========== 
+Wymień błędne definicje
+template<class T, U , class V> 
+void ff(T, U, V)
+
+template<class T, U , class V> 
+T ff(int *T);
+
+template<class T1, typename T2, class T3> 
+T1 ff(T2, T3);
+
+template<class mojaT, class mojaT> 
+void ff(mojaT, mojaT)
+
+template<class T>
+void ff(T, T);
+
+
+=========
+Wymień błędne wywołania
+template<class T1, class T2, class T3>
+T1 sum(T2, T3); 
+
+double obd1, obd2;
+float obf1, obf2,;
+char c1, c2; 
+
+sum(obd1, obd2);
+sum<double, double, double> (obf1, obf2); 
+sum<int> ( obc1, obc2);
+sum<double, double> ( obf1, obf2);

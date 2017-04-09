@@ -3,11 +3,6 @@
 #include <string>
 #include <vector>
 
-void* operator new(size_t size) {
-    throw std::bad_alloc();
-    return nullptr;
-}
-
 int my_atoi(const std::string& str) {
     int value = std::atoi(str.c_str());
     if (value == 0 && str == "0") {
@@ -19,22 +14,29 @@ int my_atoi(const std::string& str) {
     throw std::invalid_argument("Bad argument");
 }
 
+std::vector<int> foo(const std::vector<std::string>& strs) noexcept {
+    std::vector<int> toBeReturned;
+    try {
+        for (const std::string val : strs) {
+            toBeReturned.push_back(my_atoi(val));
+        }
+    } catch (const std::bad_alloc&) {
+        // .. 
+    }
+    return toBeReturned;
+}
+
 int main(int argc, char* argv[]) {
-    if (argc < 2) {
+    if (argc < 3) {
         std::cerr << "" << std::endl;
         return EXIT_FAILURE;
     }
 
-    int* p;
+    std::vector<std::string> vec{argv[1], argv[2]};
     try {
-        p = new int;
-        std::cout << my_atoi(argv[1]) << std::endl;
-        delete p;
+        auto v = foo(vec);
+        for (auto i : v) std::cout << i << std::endl;
     } catch (const std::exception& ex) {
-        std::cerr << "Exception happened " << ex.what() << std::endl;
-        delete p;
-    } catch (const std::bad_alloc& ex) {
-        std::cerr << "Bad Exception happened " << ex.what() << std::endl;
+        std::cerr << "Exception " << std::endl;
     }
-    return EXIT_SUCCESS;
 }

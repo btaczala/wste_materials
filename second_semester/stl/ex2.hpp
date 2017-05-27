@@ -17,7 +17,7 @@ namespace my_std {
 int findN(const std::vector<int>& v, int n) {
     // auto vit = std::find(v.begin(), v.end(), n);
     auto vit =
-        std::find_if(v.begin(), v.end(), [n](const int& value) -> bool { return value == n; });
+        std::find_if(v.begin(), v.end(), [n](int value) -> bool { return value == n; });
     if (vit == v.end()) return -1;
     return std::distance(v.begin(), vit);
 }

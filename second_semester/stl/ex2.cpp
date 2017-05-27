@@ -90,14 +90,40 @@ TEST(ex10_copy_vec_to_list, simple)
 }
 TEST(ex11_negate_values, simple)
 {
-    std::vector<int> v { -1,-2,-3};
-    std::vector<int> expected { 1,2,3};
+    //std::vector<int> v { -1,-2,-3, 4,5,6,};
+    //std::vector<int> expected { 1,2,3};
 
-    EXPECT_EQ(my_std::abs_all_elements(v), expected);
+    //EXPECT_EQ(my_std::abs_all_elements(v), expected);
+}
+TEST(ex12_replace_bummer, simple)
+{
+    std::vector<std::string> v {"asD", "asd"};
+    std::vector<std::string> expected { "bummer", "asd"};
+    EXPECT_EQ(my_std::replace_bummer(v), expected);
 }
 
+TEST(ex12_replace_bummer, all_lower)
+{
+    std::vector<std::string> v {"asd", "asd"};
+    EXPECT_EQ(my_std::replace_bummer(v), v);
+}
 
+TEST(ex13_what_remove_does, simple)
+{
+    std::vector<std::string> v {"asd", "asd123"};
+    //EXPECT_EQ(my_std::replace_bummer(v), v);
+    //
+    std::cout << v << " " << v.size() << std::endl;
+    auto iter = std::remove(v.begin(), v.end(), "asd");
+    std::cout << v << " " << v.size() << std::endl;
+    std::cout << *(iter++) << std::endl;
+}
 
+TEST(ex14_stable_sort, simple)
+{
+    std::vector<std::string> v {"asd", "bcd", "333333", "gwd"};
+    EXPECT_FALSE(my_std::stable_sort(v));
+}
 
 
 

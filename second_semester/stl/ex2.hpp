@@ -13,6 +13,12 @@ void iota_n(OutputIterator first, Size n, Assignable value) {
     std::generate_n(first, n, [&value]() { return value++; });
 }
 
+std::ostream& operator<<(std::ostream& os, const std::vector<std::string>& v) {
+    for (auto it = v.begin(); it != v.end(); ++it) os << *it << " ";
+
+    return os;
+}
+
 namespace my_std {
 int findN(const std::vector<int>& v, int n) {
     // auto vit = std::find(v.begin(), v.end(), n);
@@ -88,11 +94,40 @@ std::list<int> copy(const std::vector<int>& v) {
 }
 
 std::vector<int> abs_all_elements(const std::vector<int>& v) {
-    std::vector<int> all2 { 2,2,2};
-    std::vector<int> toRet { 2,2,2};
-    std::transform(v.begin(), v.end(), all2.begin(), std::back_inserter(toRet),
-                   [](int v) -> int { return std::abs(v); });
+    // std::vector<int> all2{2, 2, 2};
+    std::vector<int> toRet;
+    // std::transform(v.begin(), v.end(), all2.begin(),
+    // std::back_inserter(toRet),
+    //[](int v, int s) -> int { return v + s; });
     return toRet;
+}
+
+std::vector<std::string> replace_bummer(const std::vector<std::string>& v) {
+    std::vector<std::string> newV{v};
+
+    auto hasUppercase = [](const auto& str) -> bool {
+        auto it = std::find_if(str.begin(), str.end(),
+                               [](char c) { return std::toupper(c) == c; });
+        return it != str.end();
+    };
+
+    std::replace_if(
+        newV.begin(), newV.end(),
+        [&hasUppercase](const auto& str) { return hasUppercase(str); },
+        "bummer");
+    return newV;
+}
+
+bool stable_sort(const std::vector<std::string>& v) {
+    auto stable = v;
+    auto ordinary = v;
+
+    auto compare = [](auto f, auto s) -> bool { return f.size() < s.size(); };
+
+    std::sort(ordinary.begin(), ordinary.end(),compare);
+    std::stable_sort(ordinary.begin(), ordinary.end(),compare);
+
+    return stable == ordinary;
 }
 }
 

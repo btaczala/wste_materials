@@ -88,8 +88,9 @@ std::list<int> copy(const std::vector<int>& v) {
 }
 
 std::vector<int> abs_all_elements(const std::vector<int>& v) {
-    std::vector<int> toRet;
-    std::transform(v.begin(), v.end(), std::back_inserter(toRet),
+    std::vector<int> all2 { 2,2,2};
+    std::vector<int> toRet { 2,2,2};
+    std::transform(v.begin(), v.end(), all2.begin(), std::back_inserter(toRet),
                    [](int v) -> int { return std::abs(v); });
     return toRet;
 }

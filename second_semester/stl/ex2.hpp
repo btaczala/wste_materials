@@ -5,9 +5,16 @@
 #include <cstdlib>
 #include <vector>
 
+struct FindValue {
+    bool operator()(int value)
+    {
+    }
+};
+
 namespace my_std {
 int findN(const std::vector<int>& v, int n) {
-    auto vit = std::find(v.begin(), v.end(), n);
+    //auto vit = std::find(v.begin(), v.end(), n);
+    auto vit = std::find_if(v.begin(), v.end(), FindValue());
     if (vit == v.end()) return -1;
     return std::distance(v.begin(), vit);
 }

@@ -67,52 +67,32 @@ int closest_to_zero(const std::vector<int>& v) {
     return *it;
 }
 
-std::vector<std::size_t> find_all (const std::vector<int>& v, int N)
-{
+std::vector<std::size_t> find_all(const std::vector<int>& v, int N) {
     std::vector<std::size_t> toReturn;
     auto it = std::find(v.begin(), v.end(), N);
 
-    while(it != v.end())
-    {
+    while (it != v.end()) {
         toReturn.push_back(std::distance(v.begin(), it));
-        it = std::find(++it, v.end(), N); 
+        it = std::find(++it, v.end(), N);
     }
 
     return toReturn;
 }
 
-std::list<int> copy( const std::vector<int>& v)
-{
+std::list<int> copy(const std::vector<int>& v) {
     std::list<int> l;
-    std::copy_if(v.begin(), v.end(), std::back_inserter(l), [](int v) ->bool { return v != 1;});
+    std::copy_if(v.begin(), v.end(), std::back_inserter(l),
+                 [](int v) -> bool { return v != 1; });
 
     return l;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+std::vector<int> abs_all_elements(const std::vector<int>& v) {
+    std::vector<int> toRet;
+    std::transform(v.begin(), v.end(), std::back_inserter(toRet),
+                   [](int v) -> int { return std::abs(v); });
+    return toRet;
+}
 }
 
 #endif /* end of include guard: EX2_HPP_GWJCVDEW */

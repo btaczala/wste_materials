@@ -88,6 +88,26 @@ TEST(ex10_copy_vec_to_list, simple)
 
     EXPECT_EQ(my_std::copy(v), l);
 }
+TEST(ex11_negate_values, simple)
+{
+    std::vector<int> v { -1,-2,-3};
+    std::vector<int> expected { 1,2,3};
+
+    EXPECT_EQ(my_std::abs_all_elements(v), expected);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 int main(int argc, char *argv[]) {

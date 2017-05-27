@@ -81,6 +81,15 @@ TEST(ex9_find_all_n, empty)
     EXPECT_EQ(my_std::find_all({}, 1), expected);
 }
 
+TEST(ex10_copy_vec_to_list, simple)
+{
+    std::vector<int> v { 1,1,2,1,3};
+    std::list<int> l { 2,3};
+
+    EXPECT_EQ(my_std::copy(v), l);
+}
+
+
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

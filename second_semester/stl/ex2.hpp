@@ -81,6 +81,14 @@ std::vector<std::size_t> find_all (const std::vector<int>& v, int N)
     return toReturn;
 }
 
+std::list<int> copy( const std::vector<int>& v)
+{
+    std::list<int> l;
+    std::copy_if(v.begin(), v.end(), std::back_inserter(l), [](int v) ->bool { return v != 1;});
+
+    return l;
+}
+
 
 
 

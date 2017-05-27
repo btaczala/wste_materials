@@ -5,8 +5,8 @@
 #include <cstdlib>
 #include <iostream>
 #include <list>
-#include <vector>
 #include <numeric>
+#include <vector>
 
 template <class OutputIterator, class Size, class Assignable>
 void iota_n(OutputIterator first, Size n, Assignable value) {
@@ -55,10 +55,55 @@ double mean(const std::vector<int>& v) {
     return static_cast<double>(sum) / static_cast<double>(v.size());
 }
 
-std::size_t count_odd(const std::vector<int>& v)
-{
-    return std::count_if(v.begin(), v.end(), [](int d) { return d % 2 != 0;});
+std::size_t count_odd(const std::vector<int>& v) {
+    return std::count_if(v.begin(), v.end(), [](int d) { return d % 2 != 0; });
 }
+
+int closest_to_zero(const std::vector<int>& v) {
+    auto it = std::min_element(v.begin(), v.end(), [](int f, int s) -> bool {
+        return std::abs(f) < std::abs(s);
+    });
+
+    return *it;
+}
+
+std::vector<std::size_t> find_all (const std::vector<int>& v, int N)
+{
+    std::vector<std::size_t> toReturn;
+    auto it = std::find(v.begin(), v.end(), N);
+
+    while(it != v.end())
+    {
+        toReturn.push_back(std::distance(v.begin(), it));
+        it = std::find(++it, v.end(), N); 
+    }
+
+    return toReturn;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

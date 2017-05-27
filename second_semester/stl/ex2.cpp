@@ -51,7 +51,6 @@ TEST(ex7_count_odd_elements, proper)
 {
     std::vector<int> v;
     iota_n(std::back_inserter(v) , 101, 0);
-
     EXPECT_EQ(my_std::count_odd(v), 50);
     v.push_back(4);
     EXPECT_EQ(my_std::count_odd(v), 50);
@@ -60,6 +59,26 @@ TEST(ex7_count_odd_elements, proper)
 TEST(ex7_count_odd_elements, empty)
 {
     EXPECT_EQ(my_std::count_odd({}), 0);
+}
+
+TEST(ex8_element_closest_to_zero, iota)
+{
+    std::vector<int> v { -3,-2, -1, 4, 5};
+
+    EXPECT_EQ(my_std::closest_to_zero(v), -1);
+}
+
+TEST(ex9_find_all_n, simple)
+{
+    std::vector<int> v { 1,1,2,1,3};
+
+    std::vector<std::size_t> expected{ 0,1,3};
+    EXPECT_EQ(my_std::find_all(v, 1), expected);
+}
+TEST(ex9_find_all_n, empty)
+{
+    std::vector<std::size_t> expected{};
+    EXPECT_EQ(my_std::find_all({}, 1), expected);
 }
 
 int main(int argc, char *argv[]) {
